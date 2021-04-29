@@ -29,8 +29,17 @@ namespace BatteryMonitoring.Tests
             expectedRange.Add("3-5", 4);
             expectedRange.Add("10-12", 3);
             List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12 };
-            Dictionary<string, int> actualRange = currentMeasurement.GetCurrentReadingsRanges(CurrentReadings);
-            Assert.AreEqual(expectedRange,actualRange);
+            CollectionAssert.AreEqual(expectedRange, currentMeasurement.GetCurrentReadingsRanges(CurrentReadings));
+        }
+
+        [TestMethod]
+        public void GivenReadingWithValues_WhenListHasNotExpectedRange_ThenFalseIsReturned()
+        {
+            Dictionary<string, int> expectedRange = new Dictionary<string, int>();
+            expectedRange.Add("3-5", 4);
+            expectedRange.Add("10-12", 3);
+            List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12, 10 };
+            CollectionAssert.AreEqual(expectedRange, currentMeasurement.GetCurrentReadingsRanges(CurrentReadings));
         }
     }
 }
