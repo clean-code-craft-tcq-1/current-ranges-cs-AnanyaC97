@@ -53,4 +53,4 @@ Adapt/adopt/extend the `yml` files from one of your workflow folders.
 Implement one failing test and at least one passing test:
 
 - GivenEmptyReading_WhenListIsEmpty_ThenTrueIsReturned() - PassingTest
-- GivenReadingWithValues_WhenListHasExpectedRange_ThenTrueIsReturned - FailingTest
+- GivenReadingWithValues_WhenListHasNotExpectedRange_ThenFalseIsReturned() - FailingTest
