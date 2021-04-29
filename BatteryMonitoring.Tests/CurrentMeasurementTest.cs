@@ -7,18 +7,18 @@ namespace BatteryMonitoring.Tests
     public class CurrentMeasurementTest
     {
         CurrentMeasurement currentMeasurement = new CurrentMeasurement();
+        List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12 };
 
         [TestMethod]
         public void GivenEmptyReading_WhenListIsEmpty_ThenTrueIsReturned()
         {
-            List<int> CurrentReadings = new List<int>() { };
-            Assert.IsTrue(currentMeasurement.IsReadingListEmpty(CurrentReadings));
+            List<int> emptyReadings = new List<int>();
+            Assert.IsTrue(currentMeasurement.IsReadingListEmpty(emptyReadings));
         }
 
         [TestMethod]
         public void GivenReadingWithValues_WhenListIsNotEmpty_ThenFalseIsReturned()
         {
-            List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12 };
             Assert.IsTrue(currentMeasurement.IsReadingListEmpty(CurrentReadings));
         }
 
@@ -28,7 +28,6 @@ namespace BatteryMonitoring.Tests
             Dictionary<string, int> expectedRange = new Dictionary<string, int>();
             expectedRange.Add("3-5", 4);
             expectedRange.Add("10-12", 3);
-            List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12 };
             CollectionAssert.AreEqual(expectedRange, currentMeasurement.GetCurrentReadingsRanges(CurrentReadings));
         }
 
@@ -37,8 +36,7 @@ namespace BatteryMonitoring.Tests
         {
             Dictionary<string, int> expectedRange = new Dictionary<string, int>();
             expectedRange.Add("3-5", 4);
-            expectedRange.Add("10-12", 3);
-            List<int> CurrentReadings = new List<int>() { 3, 3, 5, 4, 10, 11, 12, 10 };
+            expectedRange.Add("10-12", 4);
             CollectionAssert.AreEqual(expectedRange, currentMeasurement.GetCurrentReadingsRanges(CurrentReadings));
         }
     }
